@@ -24,15 +24,15 @@ require_once "HTML/Template/IT.php";
  * All DokuWiki plugins to extend the parser/rendering mechanism
  * need to inherit from this class
  ********************************************************************************************************************************/
-class syntax_plugin_digilentinfobox extends DokuWiki_Syntax_Plugin {
+class syntax_plugin_infobox extends DokuWiki_Syntax_Plugin {
   //Return Plugin Info
   function getInfo() {
-    return array('author' => 'Sam Kristoff',
-      'email'  => 'admin@digilent.com',
-      'date'   => '2016-04-06',
-      'name'   => 'Digilent Infobox',
-      'desc'   => 'Dokuwiki Infobox by Digilent',
-      'url'    => ' www.github.com/digilent/dokuwiki-infobox');
+     return array('author' => 'Atlas Cove',
+      'email'  => 'Atlas48@gmail.com',
+      'date'   => '2020-07-26',
+      'name'   => 'Infobox',
+      'desc'   => 'Forked from www.github.com/digilent/dokuwiki-infobox',
+      'url'    => 'www.github.com/digilent/dokuwiki-infobox');
   }
 
   //Store user variables to parse in one pass
@@ -52,14 +52,14 @@ class syntax_plugin_digilentinfobox extends DokuWiki_Syntax_Plugin {
   function getSort() { return 32; }
 
   function connectTo($mode) {
-    $this->Lexer->addEntryPattern('{{Digilent Infobox.*?(?=.*?}})',$mode,'plugin_digilentinfobox');
+    $this->Lexer->addEntryPattern('{{Infobox.*?(?=.*?}})',$mode,'plugin_infobox');
 
     //Add Internal Pattern Match For Product Page Elements
-    $this->Lexer->addPattern('\|.*?(?=.*?)\n','plugin_digilentinfobox');
+    $this->Lexer->addPattern('\|.*?(?=.*?)\n','plugin_infobox');
   }
 
   function postConnect() {
-    $this->Lexer->addExitPattern('}}','plugin_digilentinfobox');
+    $this->Lexer->addExitPattern('}}','plugin_infobox');
   }
 
   function handle($match, $state, $pos, &$handler) {
@@ -149,8 +149,6 @@ class syntax_plugin_digilentinfobox extends DokuWiki_Syntax_Plugin {
         $infoboxTpl->setVariable("TITLE", $this->title);
         $infoboxTpl->parseCurrentBlock("TITLEBLOCK");
       }
-
-
 
       //Iterate over sections
       foreach($this->data as $header => $section) {
